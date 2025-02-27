@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "📦 Next.js 보일러플레이트",
-	"packageManager": "yarn@1.22.22",
+	"packageManager": "pnpm@9.15.0",
 	"author": "chan9yu <dev.cgyeo@gmail.com>",
 	"repository": {
 		"type": "git",
