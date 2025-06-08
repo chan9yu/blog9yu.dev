@@ -1,5 +1,8 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import globals from "globals";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -12,12 +15,21 @@ const compat = new FlatCompat({
 
 /** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
-	...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+	js.configs.recommended,
+	eslintConfigPrettier,
+	...compat.extends("next/core-web-vitals", "next/typescript"),
 	{
+		languageOptions: {
+			globals: {
+				...globals.browser,
+				...globals.node
+			}
+		},
 		plugins: {
 			"simple-import-sort": simpleImportSort
 		},
 		rules: {
+			"@typescript-eslint/no-unused-vars": "off",
 			"simple-import-sort/imports": "error",
 			"simple-import-sort/exports": "error"
 		}
