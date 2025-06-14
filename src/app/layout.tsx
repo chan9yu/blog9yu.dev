@@ -2,6 +2,10 @@ import "@/shared/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PropsWithChildren } from "react";
+
+import Footer from "@/shared/components/layouts/Footer";
+import Header from "@/shared/components/layouts/Header";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -21,14 +25,16 @@ export const metadata: Metadata = {
 	}
 };
 
-export default function RootLayout({
-	children
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+		<html lang="ko">
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<div className="flex min-h-screen flex-col">
+					<Header />
+					<main className="flex-1">{children}</main>
+					<Footer />
+				</div>
+			</body>
 		</html>
 	);
 }
