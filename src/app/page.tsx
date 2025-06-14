@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Card, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/Card";
 
 export default function RootPage() {
@@ -6,16 +8,18 @@ export default function RootPage() {
 			<div className="space-y-8">
 				<h2 className="text-3xl font-bold tracking-tight">블로그 목록</h2>
 
-				<div className="space-y-4">
+				<div className="grid gap-4">
 					{[1, 2, 3].map((i) => (
-						<Card key={i}>
-							<CardHeader>
-								<CardTitle>블로그 제목 {i}</CardTitle>
-								<CardDescription>
-									이것은 블로그 포스트에 대한 간단한 설명입니다. 여러 줄의 텍스트가 있을 수 있습니다.
-								</CardDescription>
-							</CardHeader>
-						</Card>
+						<Link key={i} href={`/blog/${i}`}>
+							<Card>
+								<CardHeader>
+									<CardTitle>블로그 제목 {i}</CardTitle>
+									<CardDescription>
+										이것은 블로그 포스트에 대한 간단한 설명입니다. 여러 줄의 텍스트가 있을 수 있습니다.
+									</CardDescription>
+								</CardHeader>
+							</Card>
+						</Link>
 					))}
 				</div>
 			</div>
