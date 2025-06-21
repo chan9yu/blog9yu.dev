@@ -13,7 +13,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
 	const { slug } = await params;
 
 	return (
-		<article className="container mx-auto px-4 py-12">
+		<article className="container py-12">
 			<div className="space-y-4">
 				<div className="space-y-2">
 					<Badge>프론트엔드</Badge>
