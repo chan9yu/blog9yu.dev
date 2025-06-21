@@ -2,7 +2,7 @@ import "@/shared/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import Footer from "@/shared/components/layouts/Footer";
 import Header from "@/shared/components/layouts/Header";
