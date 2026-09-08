@@ -4,13 +4,18 @@ import { findPostWhere, loadAllArticleImages } from "./helpers";
 
 test.describe("M7-06 글 읽기 파이프라인", () => {
 	test("코드 블록이 shiki 토큰으로 하이라이트되어 렌더된다", async ({ page }) => {
+		// 언어가 text인 코드 블록은 shiki가 색 토큰을 만들지 않으므로,
+		// 첫 블록 대신 하이라이트 토큰이 있는 블록을 찾아야 글 내용과 무관하게 안정적이다
 		await findPostWhere(
 			page,
-			async (p) => (await p.locator("article pre code").count()) > 0,
-			"코드 블록이 있는 글이 없다"
+			async (p) => (await p.locator("article pre code span[style]").count()) > 0,
+			"하이라이트된 코드 블록이 있는 글이 없다"
 		);
 
-		const codeBlock = page.locator("article pre.shiki").first();
+		const codeBlock = page
+			.locator("article pre.shiki")
+			.filter({ has: page.locator("code span[style]") })
+			.first();
 		await expect(codeBlock).toBeVisible();
 
 		await expect(codeBlock.locator("code span[style]").first()).toBeAttached();
